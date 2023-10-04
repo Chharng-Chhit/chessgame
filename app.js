@@ -41,6 +41,7 @@ const createTableQuery = `
 
 
 app.get('/api/data', (req, res) => {
+  res.json("hello");
   // Query data from the database
   pool.query('SELECT * FROM chessdata', (error, results) => {
     if (error) {
