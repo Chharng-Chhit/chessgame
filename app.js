@@ -39,9 +39,12 @@ const createTableQuery = `
     }
   });
 
+app.get('/', (req, res)=>{
+  res.json("api connected!!");
+})
 
 app.get('/api/data', (req, res) => {
-  res.json("hello");
+  // res.json("hello");
   // Query data from the database
   pool.query('SELECT * FROM chessdata', (error, results) => {
     if (error) {

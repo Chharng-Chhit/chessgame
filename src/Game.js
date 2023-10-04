@@ -1,5 +1,8 @@
 function postDataToDatabase(data) {
-  fetch('http://localhost:3000/api/save', {
+  let url = 'https://khmer-chess-game.onrender.com/api/save';
+  // let url = 'http://localhost:3000/api/save';
+  
+  fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
