@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Chhit@085',
-  database: 'data',
+  host: 'sql12.freesqldatabase.com',
+  user: 'sql12650962',
+  password: 'FL63TIEAY6',
+  database: 'sql12650962',
   //   waitForConnections: true,
   //   connectionLimit: 10,
   //   queueLimit: 0
