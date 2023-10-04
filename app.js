@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const mysql = require('mysql2');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,6 +21,23 @@ const pool = mysql.createPool({
   //   queueLimit: 0
 });
 
+
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS chessdata (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      move JSON,
+      winner VARCHAR(255)
+  );
+  `;
+
+  // Execute the query to create the table when your server starts
+  pool.query(createTableQuery, (error, results) => {
+    if (error) {
+      console.error('Error creating table: ' + error.stack);
+    } else {
+      console.log('Table "chessdata" created successfully');
+    }
+  });
 
 
 app.get('/api/data', (req, res) => {
@@ -53,35 +70,26 @@ app.post('/api/save', (req, res) => {
       })
     }
   })
+});
 
-  // pool.query('INSERT INTO users(id, name) VALUES (?, ?)', [id, name], (error, results, fields) => {
-  //   if (error) {
-  //     console.error('Error executing query: ' + error.stack);
-  //     res.status(500).json({ error: 'Internal Server Error' });
-  //   } else {
-  //     res.json({ message: 'Piece added successfully!' });
-  //   }
-  // });
-  });
-
-  // app.post('/api/pieces', (req, res) => {
-  //   // Insert a new piece into the database
-  //   const { id, name } = req.body;
-  //   pool.query('INSERT INTO users(id, name) VALUES (?, ?)', [id, name], (error, results, fields) => {
-  //     if (error) {
-  //       console.error('Error executing query: ' + error.stack);
-  //       res.status(500).json({ error: 'Internal Server Error' });
-  //     } else {
-  //       res.json({ message: 'Piece added successfully!' });
-  //     }
-  //   });
-  // });
+// app.post('/api/pieces', (req, res) => {
+//   // Insert a new piece into the database
+//   const { id, name } = req.body;
+//   pool.query('INSERT INTO users(id, name) VALUES (?, ?)', [id, name], (error, results, fields) => {
+//     if (error) {
+//       console.error('Error executing query: ' + error.stack);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     } else {
+//       res.json({ message: 'Piece added successfully!' });
+//     }
+//   });
+// });
 
 
-  // var sqlInsert = "INSERT INTO customers ( firstname, lastname, gender, dob, tel, email, is_active) VALUES (?,?,?,?,?,?,?)"
+// var sqlInsert = "INSERT INTO customers ( firstname, lastname, gender, dob, tel, email, is_active) VALUES (?,?,?,?,?,?,?)"
 
-  // db.query(sqlInsert,[body.firstname, body.lastname, body.gender, body.dob, body.tel, body.email, body.is_active],(error,rows)
+// db.query(sqlInsert,[body.firstname, body.lastname, body.gender, body.dob, body.tel, body.email, body.is_active],(error,rows)
 
-  app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-  });
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
