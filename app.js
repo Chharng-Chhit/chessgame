@@ -30,6 +30,7 @@ app.use(bodyParser.json());
 
 const pool = mysql.createConnection({
   host: 'localhost',
+  post: '3306',
   user: 'root',
   password: 'Chhit@085',
   database: 'data',
