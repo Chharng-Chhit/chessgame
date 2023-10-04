@@ -274,6 +274,7 @@ class Game {
         copy.push(current);
         // console.log(makeMove);
         if (this.king_checked(this.turn)) {
+          // ** bug  **
           if (this.king_dead(this.turn)) {
             this.checkmate(clickedPiece.color);
             win = true;
